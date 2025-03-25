@@ -137,7 +137,7 @@ export class NpcService {
     const tracoBaseNode = npcGenerationTree[tracoBase];
 
     // Gênero considerando as restrições do traço base
-    const generosDisponiveis = tracoBaseNode.genders || ['Masculino', 'Feminino', 'Outro'];
+    const generosDisponiveis = tracoBaseNode.genders || ['Masculino', 'Feminino'];
     const genero = parametros?.genero || this.getRandomItem(generosDisponiveis);
 
 
@@ -147,9 +147,7 @@ export class NpcService {
    if (genero === 'Feminino') {
       this.nomeGerado = this.getRandomItem(this.nomes.femininos);
    }
-   else{
-    this.nomeGerado = this.getRandomItem(this.nomes.femininos);
-   }
+
 
     // Selecionar raça considerando as restrições do traço base
     const racasDisponiveis = tracoBaseNode.races || this.racas;
