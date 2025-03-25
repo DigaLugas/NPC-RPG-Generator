@@ -1,0 +1,250 @@
+<div class="container mx-auto p-4">
+  <div class="mb-8 text-center">
+    <h1 class="text-3xl font-bold mb-2">Gerador de NPCs</h1>
+    <p class="text-gray-600">Crie personagens completos para suas aventuras de RPG</p>
+  </div>
+
+  <div class="flex flex-wrap md:flex-nowrap gap-4">
+    <!-- Formulário -->
+    <div class="w-full md:w-1/2 bg-white p-4 rounded shadow">
+      <h2 class="text-xl font-semibold mb-4">Parâmetros (Opcionais)</h2>
+
+      <form [formGroup]="npcForm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Campos básicos -->
+          <div class="form-group">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nome</label>
+            <input type="text" formControlName="nome" placeholder="Opcional"
+                  class="w-full p-2 border rounded">
+          </div>
+
+          <div class="form-group">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Idade</label>
+            <input type="number" formControlName="idade" placeholder="Opcional"
+                  class="w-full p-2 border rounded">
+          </div>
+
+          <div class="form-group">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Raça</label>
+            <select formControlName="raca" class="w-full p-2 border rounded">
+              <option value="">Aleatório</option>
+              <option *ngFor="let raca of racas" [value]="raca">{{ raca }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Gênero</label>
+            <select formControlName="genero" class="w-full p-2 border rounded">
+              <option value="">Aleatório</option>
+              <option *ngFor="let genero of generos" [value]="genero">{{ genero }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Ocupação</label>
+            <select formControlName="ocupacao" class="w-full p-2 border rounded">
+              <option value="">Aleatório</option>
+              <option *ngFor="let ocupacao of ocupacoes" [value]="ocupacao">{{ ocupacao }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Motivação</label>
+            <input type="text" formControlName="motivacao" placeholder="Opcional"
+                  class="w-full p-2 border rounded">
+          </div>
+        </div>
+
+        <!-- Opções avançadas -->
+        <div class="mt-4">
+          <button type="button" (click)="toggleAdvancedOptions()"
+                 class="text-blue-600 hover:text-blue-800 font-medium">
+            {{ showAdvancedOptions ? 'Ocultar opções avançadas' : 'Mostrar opções avançadas' }}
+          </button>
+        </div>
+
+        <div *ngIf="showAdvancedOptions" class="mt-4">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Personalidade</label>
+            <div class="flex items-center mb-2">
+              <select #personalidadeSelect class="w-full p-2 border rounded mr-2">
+                <option value="">Escolha um traço...</option>
+                <option *ngFor="let traco of personalidades" [value]="traco">{{ traco }}</option>
+              </select>
+              <button type="button" (click)="personalidadeArray.push(fb.control(personalidadeSelect.value)); personalidadeSelect.value = ''"
+                     class="bg-blue-500 text-white px-3 py-2 rounded">+</button>
+            </div>
+            <div formArrayName="personalidade" class="mt-2">
+              <div *ngFor="let controle of personalidadeArray.controls; let i = index" class="flex items-center mb-1">
+                <input [formControlName]="i" class="w-full p-2 border rounded mr-2">
+                <button type="button" (click)="removePersonalidade(i)"
+                       class="bg-red-500 text-white px-3 py-1 rounded">X</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Habilidades</label>
+            <div class="flex items-center mb-2">
+              <input #novaHabilidade type="text" class="w-full p-2 border rounded mr-2"
+                    placeholder="Nova habilidade...">
+              <button type="button" (click)="habilidadesArray.push(fb.control(novaHabilidade.value)); novaHabilidade.value = ''"
+                     class="bg-blue-500 text-white px-3 py-2 rounded">+</button>
+            </div>
+            <div formArrayName="habilidades" class="mt-2">
+              <div *ngFor="let controle of habilidadesArray.controls; let i = index" class="flex items-center mb-1">
+                <input [formControlName]="i" class="w-full p-2 border rounded mr-2">
+                <button type="button" (click)="removeHabilidade(i)"
+                       class="bg-red-500 text-white px-3 py-1 rounded">X</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-4" formGroupName="aparencia">
+            <h3 class="font-medium mb-2">Aparência</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="form-group">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Altura</label>
+                <input type="text" formControlName="altura" placeholder="Ex: 175cm"
+                      class="w-full p-2 border rounded">
+              </div>
+              <div class="form-group">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Peso</label>
+                <input type="text" formControlName="peso" placeholder="Ex: 70kg"
+                      class="w-full p-2 border rounded">
+              </div>
+              <div class="form-group">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Cor do cabelo</label>
+                <input type="text" formControlName="corCabelo" placeholder="Ex: Castanho"
+                      class="w-full p-2 border rounded">
+              </div>
+              <div class="form-group">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Cor dos olhos</label>
+                <input type="text" formControlName="corOlhos" placeholder="Ex: Azuis"
+                      class="w-full p-2 border rounded">
+              </div>
+            </div>
+            <div class="form-group mt-2">
+              <label class="block text-sm font-medium text-gray-700 mb-1">Características Distintivas</label>
+              <input type="text" formControlName="caracteristicasDistintivas"
+                    placeholder="Ex: Cicatriz no rosto" class="w-full p-2 border rounded">
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">História</label>
+            <textarea formControlName="historia" rows="4"
+                     class="w-full p-2 border rounded" placeholder="História do personagem..."></textarea>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Notas</label>
+            <textarea formControlName="notas" rows="2"
+                     class="w-full p-2 border rounded" placeholder="Anotações adicionais..."></textarea>
+          </div>
+        </div>
+
+        <div class="flex justify-center gap-4 mt-6">
+          <button type="button" (click)="generateNpc()"
+                 class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded">
+            Gerar NPC
+          </button>
+          <button type="button" (click)="clearForm()"
+                 class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded">
+            Limpar
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Resultado -->
+    <div class="w-full md:w-1/2">
+      <div *ngIf="generatedNpc" class="bg-white p-4 rounded shadow">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold">{{ generatedNpc.nome }}</h2>
+          <button (click)="saveNpc()"
+                 class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+            Salvar NPC
+          </button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <p><strong>Raça:</strong> {{ generatedNpc.raca }}</p>
+            <p><strong>Idade:</strong> {{ generatedNpc.idade }} anos</p>
+            <p><strong>Gênero:</strong> {{ generatedNpc.genero }}</p>
+            <p><strong>Ocupação:</strong> {{ generatedNpc.ocupacao }}</p>
+          </div>
+          <div>
+            <p><strong>Personalidade:</strong> {{ generatedNpc.personalidade.join(', ') }}</p>
+            <p><strong>Motivação:</strong> {{ generatedNpc.motivacao }}</p>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <h3 class="font-medium mb-1">História</h3>
+          <p class="text-gray-700">{{ generatedNpc.historia }}</p>
+        </div>
+
+        <div class="mb-4">
+          <h3 class="font-medium mb-1">Aparência</h3>
+          <div class="grid grid-cols-2 gap-2">
+            <p><strong>Altura:</strong> {{ generatedNpc.aparencia.altura }}</p>
+            <p><strong>Peso:</strong> {{ generatedNpc.aparencia.peso }}</p>
+            <p><strong>Cabelo:</strong> {{ generatedNpc.aparencia.corCabelo }}</p>
+            <p><strong>Olhos:</strong> {{ generatedNpc.aparencia.corOlhos }}</p>
+          </div>
+          <p><strong>Características:</strong> {{ generatedNpc.aparencia.caracteristicasDistintivas }}</p>
+        </div>
+
+        <div class="mb-4">
+          <h3 class="font-medium mb-1">Habilidades</h3>
+          <ul class="list-disc list-inside">
+            <li *ngFor="let habilidade of generatedNpc.habilidades">{{ habilidade }}</li>
+          </ul>
+        </div>
+
+        <div class="mb-4">
+          <h3 class="font-medium mb-1">Objetivos</h3>
+          <ul class="list-disc list-inside">
+            <li *ngFor="let objetivo of generatedNpc.objetivos">{{ objetivo }}</li>
+          </ul>
+        </div>
+
+        <div class="mb-4">
+          <h3 class="font-medium mb-1">Segredos</h3>
+          <ul class="list-disc list-inside">
+            <li *ngFor="let segredo of generatedNpc.segredos">{{ segredo }}</li>
+          </ul>
+        </div>
+
+        <div class="mb-4">
+          <h3 class="font-medium mb-1">Posses</h3>
+          <ul class="list-disc list-inside">
+            <li *ngFor="let posse of generatedNpc.posses">{{ posse }}</li>
+          </ul>
+        </div>
+        <div *ngIf="generatedNpc.contexto" class="mb-4">
+          <h3 class="font-medium mb-1">Contexto</h3>
+          <div class="grid grid-cols-2 gap-2">
+            <p><strong>Origem Social:</strong> {{ generatedNpc.contexto.origemSocial }}</p>
+            <p><strong>Temperamento:</strong> {{ generatedNpc.contexto.temperamento }}</p>
+            <p><strong>Traços Culturais:</strong> {{ generatedNpc.contexto.tracosCulturais }}</p>
+          </div>
+        </div>
+
+        <div *ngIf="generatedNpc.notas" class="mb-4">
+          <h3 class="font-medium mb-1">Notas</h3>
+          <p class="text-gray-700">{{ generatedNpc.notas }}</p>
+        </div>
+
+      <div *ngIf="!generatedNpc" class="bg-gray-100 p-4 rounded shadow flex items-center justify-center h-64">
+        <p class="text-gray-500 text-center">
+          Clique em "Gerar NPC" para criar um personagem.<br>
+          Preencha os campos opcionais para personalizar a geração.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>

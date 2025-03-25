@@ -1,0 +1,75 @@
+<div class="bg-white p-4 rounded shadow mb-4">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-xl font-semibold">{{ npc.nome }}</h2>
+    <div>
+      <button (click)="editNpc()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded mr-2">
+        Editar
+      </button>
+      <button (click)="deleteNpc()" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">
+        Excluir
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4 mb-4">
+    <div>
+      <p><strong>Raça:</strong> {{ npc.raca }}</p>
+      <p><strong>Idade:</strong> {{ npc.idade }} anos</p>
+      <p><strong>Gênero:</strong> {{ npc.genero }}</p>
+      <p><strong>Ocupação:</strong> {{ npc.ocupacao }}</p>
+    </div>
+    <div>
+      <p><strong>Personalidade:</strong> {{ npc.personalidade.join(', ') }}</p>
+      <p><strong>Motivação:</strong> {{ npc.motivacao }}</p>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="font-medium mb-1">História</h3>
+    <p class="text-gray-700">{{ npc.historia }}</p>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="font-medium mb-1">Aparência</h3>
+    <div class="grid grid-cols-2 gap-2">
+      <p><strong>Altura:</strong> {{ npc.aparencia.altura }}</p>
+      <p><strong>Peso:</strong> {{ npc.aparencia.peso }}</p>
+      <p><strong>Cabelo:</strong> {{ npc.aparencia.corCabelo }}</p>
+      <p><strong>Olhos:</strong> {{ npc.aparencia.corOlhos }}</p>
+    </div>
+    <p><strong>Características:</strong> {{ npc.aparencia.caracteristicasDistintivas }}</p>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="font-medium mb-1">Habilidades</h3>
+    <ul class="list-disc list-inside">
+      <li *ngFor="let habilidade of npc.habilidades">{{ habilidade }}</li>
+    </ul>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="font-medium mb-1">Objetivos</h3>
+    <ul class="list-disc list-inside">
+      <li *ngFor="let objetivo of npc.objetivos">{{ objetivo }}</li>
+    </ul>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="font-medium mb-1">Segredos</h3>
+    <ul class="list-disc list-inside">
+      <li *ngFor="let segredo of npc.segredos">{{ segredo }}</li>
+    </ul>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="font-medium mb-1">Posses</h3>
+    <ul class="list-disc list-inside">
+      <li *ngFor="let posse of npc.posses">{{ posse }}</li>
+    </ul>
+  </div>
+
+  <div *ngIf="npc.notas" class="mb-4">
+    <h3 class="font-medium mb-1">Notas</h3>
+    <p class="text-gray-700">{{ npc.notas }}</p>
+  </div>
+</div>

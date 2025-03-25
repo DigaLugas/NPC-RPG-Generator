@@ -1,0 +1,66 @@
+<div class="container mx-auto p-4">
+  <div class="mb-8 text-center">
+    <h1 class="text-3xl font-bold mb-2">NPCs Salvos</h1>
+    <p class="text-gray-600">Gerencie e reutilize seus personagens</p>
+  </div>
+
+  <div class="flex mb-4 gap-4">
+    <button (click)="exportNpcs()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+      Exportar NPCs
+    </button>
+
+    <label class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded cursor-pointer">
+      Importar NPCs
+      <input type="file" (change)="importNpcs($event)" accept=".json" class="hidden">
+    </label>
+  </div>
+
+  <div *ngIf="savedNpcs.length === 0" class="bg-gray-100 p-4 rounded shadow flex items-center justify-center h-64">
+    <p class="text-gray-500 text-center">
+      Você ainda não salvou nenhum NPC.<br>
+      Vá para o gerador e crie alguns personagens!
+    </p>
+  </div>
+
+  <div *ngIf="savedNpcs.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Lista de NPCs -->
+    <div>
+      <h2 class="text-xl font-semibold mb-4">Lista de NPCs ({{ savedNpcs.length }})</h2>
+
+      <div class="bg-white rounded shadow p-4">
+        <div *ngFor="let npc of savedNpcs" class="border-b last:border-0 py-2">
+          <div class="flex justify-between items-center">
+            <button (click)="selectNpc(npc)" class="text-left hover:text-blue-600 font-medium">
+              {{ npc.nome }} - {{ npc.raca }} {{ npc.ocupacao }}
+            </button>
+            <div>
+              <button (click)="onNpcEdited(npc)" class="text-yellow-500 hover:text-yellow-600 mr-3">
+                Editar
+              </button>
+              <button (click)="npcService.deleteNpc(npc.id!); onNpcDeleted(npc.id!)" class="text-red-500 hover:text-red-600">
+                Excluir
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detalhes do NPC -->
+    <div>
+      <h2 class="text-xl font-semibold mb-4">Detalhes do NPC</h2>
+
+      <div *ngIf="!selectedNpc" class="bg-gray-100 p-4 rounded shadow flex items-center justify-center h-64">
+        <p class="text-gray-500 text-center">
+          Selecione um NPC para ver seus detalhes
+        </p>
+      </div>
+
+      <app-npc-display
+        *ngIf="selectedNpc"
+        [npc]="selectedNpc"
+        (deleteEvent)="onNpcDeleted($event)"
+        (editEvent)="onNpcEdited($event)">
+      </app-npc-display>
+    </div>
+  </div>

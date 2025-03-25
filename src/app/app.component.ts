@@ -3,9 +3,10 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
   standalone: false,
-  styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'npc-generator';
+  title = 'Gerador de NPCs';
 }
+
