@@ -11,14 +11,27 @@ import {npcGenerationTree} from '../utils/npcGenerationTree';
 export class NpcService {
   private savedNpcs: NPC[] = [];
   private savedNpcsSubject = new BehaviorSubject<NPC[]>([]);
+  private nomeGerado = "";
+  private racas = ['Humano', 'Elfo', 'Anão', 'Halfling', 'Gnomo', 'Meio-Orc', 'Meio-Elfo', 'Tiefling', 'Draconato'];
 
 
   private nomes = {
-    masculinos: ['Arthur', 'Cedric', 'Edgar', 'George', 'Thorin', 'Gandalf', 'Elrond', 'Boromir', 'Aragorn', 'Legolas'],
-    femininos: ['Beatrice', 'Diana', 'Fiona', 'Hilda', 'Galadriel', 'Arwen', 'Eowyn', 'Tauriel', 'Morwen', 'Luthien']
+    masculinos: [
+      'Arthur', 'Cedric', 'Edgar', 'George', 'Thorin', 'Gandalf', 'Elrond', 'Boromir', 'Aragorn', 'Legolas',
+      'Baldric', 'Alistair', 'Duncan', 'Eldric', 'Fenrir', 'Garrick', 'Hadrian', 'Ivar', 'Jareth', 'Kael',
+      'Leoric', 'Magnus', 'Norric', 'Osric', 'Perrin', 'Quentin', 'Roderic', 'Sirius', 'Tristan', 'Ulrich',
+      'Viggo', 'Wulfric', 'Xander', 'Yorick', 'Zephyr', 'Ambrose', 'Bertrand', 'Cassius', 'Dorian', 'Evander',
+      'Faelan', 'Gideon', 'Hector', 'Isidore', 'Julius', 'Lucian', 'Malakai', 'Nathaniel', 'Octavius', 'Percival'
+    ],
+    femininos: [
+      'Beatrice', 'Diana', 'Fiona', 'Hilda', 'Galadriel', 'Arwen', 'Eowyn', 'Tauriel', 'Morwen', 'Luthien',
+      'Arianne', 'Brienne', 'Celeste', 'Delphine', 'Elowen', 'Freya', 'Genevieve', 'Helena', 'Isolde', 'Jasmine',
+      'Kassandra', 'Lysandra', 'Morgana', 'Naomi', 'Ophelia', 'Penelope', 'Quinn', 'Rowena', 'Seraphina', 'Thalia',
+      'Ursula', 'Vesper', 'Willow', 'Xanthe', 'Yseult', 'Zelda', 'Adelaide', 'Bianca', 'Cassandra', 'Daphne',
+      'Evelyn', 'Fay', 'Giselle', 'Harmonia', 'Ivanna', 'Jocelyn', 'Katarina', 'Lilith', 'Mirabelle', 'Nova'
+    ]
   };
 
-  private racas = ['Humano', 'Elfo', 'Anão', 'Halfling', 'Gnomo', 'Meio-Orc', 'Meio-Elfo', 'Tiefling', 'Draconato'];
 
   private ocupacoes = [
     'Ferreiro', 'Comerciante', 'Guarda', 'Aventureiro', 'Curandeiro', 'Ladino', 'Mago',
@@ -40,19 +53,47 @@ export class NpcService {
     'Cicatriz no rosto', 'Tatuagem tribal', 'Olhar penetrante', 'Manca de uma perna',
     'Braço amputado', 'Rosto marcado por varíola', 'Dentes de ouro', 'Queimadura visível',
     'Marca de nascença', 'Albinismo', 'Heterocromia', 'Pele escamosa', 'Cabelo extraordinariamente longo',
-    'Barba trançada com joias', 'Sem características distintivas'
+    'Barba trançada com joias', 'Olhos sem pupilas', 'Mãos calejadas de trabalho árduo',
+    'Cheiro peculiar', 'Voz rouca e áspera', 'Riso perturbador', 'Andar elegante e refinado',
+    'Pele excessivamente pálida', 'Dedo faltando', 'Uma cicatriz que lembra um símbolo',
+    'Olhos sempre úmidos, como se estivesse chorando', 'Sobrancelhas extremamente grossas',
+    'Orelhas pontudas mesmo sendo humano', 'Gagueira', 'Aparência extremamente jovem ou velha para sua idade',
+    'Usa sempre uma máscara', 'Mãos trêmulas', 'Um olho cego coberto por um tapa-olho',
+    'Rosto deformado por ácido', 'Dentes afiados como de um predador', 'Voz extremamente grave ou aguda',
+    'Roupas sempre impecáveis ou extremamente sujas', 'Olhar que parece enxergar a alma',
+    'Corpo coberto por runas brilhantes', 'Postura imponente', 'Sempre vestindo um capuz',
+    'Uma aura perturbadora', 'Sem características distintivas'
   ];
 
   private habilidades = [
     'Artesanato', 'Alquimia', 'Cura', 'Furtividade', 'Persuasão', 'Intimidação',
     'Conhecimento arcano', 'Sobrevivência', 'Atletismo', 'Acrobacia', 'História',
-    'Natureza', 'Religião', 'Investigação', 'Percepção', 'Atuação', 'Enganação'
+    'Natureza', 'Religião', 'Investigação', 'Percepção', 'Atuação', 'Enganação',
+    'Forja de armas', 'Montaria', 'Domesticação de animais', 'Rastreio',
+    'Criação de venenos', 'Arco e flecha', 'Briga de rua', 'Navegação',
+    'Estratégia de batalha', 'Mecânica', 'Pilotagem de embarcações', 'Cartografia',
+    'Escrita e caligrafia', 'Oratória', 'Trabalho com metais preciosos',
+    'Jogos de azar', 'Luta de arena', 'Dança', 'Disfarce', 'Leitura de lábios',
+    'Marcenaria', 'Linguística', 'Música', 'Criação de feitiços', 'Resistência física',
+    'Manipulação psicológica', 'Codificação de mensagens secretas', 'Escalada',
+    'Conhecimento sobre venenos e antídotos'
   ];
 
   private motivacoes = [
     'Busca por riqueza', 'Desejo de poder', 'Busca por conhecimento', 'Vingança',
     'Proteção da família', 'Servir a um deus', 'Redenção', 'Aventura e exploração',
-    'Fugir do passado', 'Cumprir uma profecia', 'Restaurar a honra', 'Encontrar um artefato perdido'
+    'Fugir do passado', 'Cumprir uma profecia', 'Restaurar a honra', 'Encontrar um artefato perdido',
+    'Criar uma nova ordem mundial', 'Destruir um inimigo pessoal', 'Tornar-se imortal',
+    'Ser lembrado na história', 'Provar sua superioridade', 'Proteger um segredo perigoso',
+    'Ser aceito por um grupo ou sociedade', 'Encontrar um lugar para chamar de lar',
+    'Testar seus próprios limites', 'Achar um amor verdadeiro', 'Vingar um mentor ou mestre caído',
+    'Escapar de um casamento arranjado', 'Rebelião contra um sistema opressor',
+    'Resgatar um ente querido', 'Servir como espião', 'Esconder uma identidade secreta',
+    'Libertar um povo escravizado', 'Derrubar um governante corrupto', 'Achar um tesouro lendário',
+    'Seguir um sonho profético', 'Tornar-se o melhor em seu ofício', 'Evitar uma guerra',
+    'Aprender a verdade sobre seu passado', 'Criar uma invenção revolucionária',
+    'Encontrar um lugar lendário', 'Dominar uma escola de magia específica',
+    'Trazer de volta alguém que morreu'
   ];
 
   constructor() {
@@ -98,9 +139,17 @@ export class NpcService {
     // Gênero considerando as restrições do traço base
     const generosDisponiveis = tracoBaseNode.genders || ['Masculino', 'Feminino', 'Outro'];
     const genero = parametros?.genero || this.getRandomItem(generosDisponiveis);
-    const nomesList = genero === 'Masculino' ? this.nomes.masculinos :
-                      genero === 'Feminino' ? this.nomes.femininos :
-                      [...this.nomes.masculinos, ...this.nomes.femininos];
+
+
+    if(genero === 'Masculino') {
+      this.nomeGerado = this.getRandomItem(this.nomes.masculinos);
+   }
+   if (genero === 'Feminino') {
+      this.nomeGerado = this.getRandomItem(this.nomes.femininos);
+   }
+   else{
+    this.nomeGerado = this.getRandomItem(this.nomes.femininos);
+   }
 
     // Selecionar raça considerando as restrições do traço base
     const racasDisponiveis = tracoBaseNode.races || this.racas;
@@ -153,7 +202,7 @@ export class NpcService {
 
     // Gerar história
     const historia = this.gerarHistoria({
-      nome: parametros?.nome || this.getRandomItem(nomesList),
+      nome: parametros?.nome || this.nomeGerado,
       raca,
       ocupacao,
       personalidade: tracos,
@@ -165,7 +214,7 @@ export class NpcService {
     const objetivos = this.gerarObjetivos(numObjetivos, motivacao);
 
     return {
-      nome: parametros?.nome || this.getRandomItem(nomesList),
+      nome: parametros?.nome || this.nomeGerado,
       idade,
       raca,
       genero,
@@ -231,21 +280,6 @@ export class NpcService {
     return array[Math.floor(Math.random() * array.length)];
   }
 
-  private gerarIdadePorRaca(raca: string): number {
-    switch(raca) {
-      case 'Elfo':
-      case 'Meio-Elfo':
-        return Math.floor(Math.random() * 500) + 20; //20-520 anos
-      case 'Anão':
-        return Math.floor(Math.random() * 350) + 30; //30-380 anos
-      case 'Gnomo':
-        return Math.floor(Math.random() * 400) + 25; //25-425 anos
-      case 'Halfling':
-        return Math.floor(Math.random() * 100) + 20; //20-120 anos
-      default: //Humano e outros
-        return Math.floor(Math.random() * 50) + 18; //18-68 anos
-    }
-  }
 
   private gerarPesoPorRacaEAltura(raca: string, altura: string): string {
     const alturaEmCm = parseInt(altura);

@@ -237,6 +237,267 @@ const npcGenerationTree: { [key: string]: TraitNode } = {
         'Orientado a metas', 'Adaptável'
       ]
     }
+  },
+  'Sarcástico': {
+    trait: 'Sarcástico',
+    compatibleTraits: [
+      'Astuto', 'Caótico', 'Inteligente', 'Crítico', 'Irônico', 'Observador',
+      'Desconfiado', 'Cínico', 'Provocativo'
+    ],
+    heightRange: { min: 150, max: 185 },
+    ageRange: { min: 20, max: 55 },
+    occupations: [
+      'Comediante', 'Escritor', 'Advogado', 'Crítico', 'Jornalista', 'Professor',
+      'Diplomata', 'Consultor', 'Estrategista', 'Consultor Político', 'Artista'
+    ],
+    motivations: [
+      'Desvendar verdades', 'Provocar reflexão', 'Criticar sistemas', 'Expor hipocrisia',
+      'Entretenimento', 'Inteligência social', 'Defesa pessoal', 'Desafiar status quo',
+      'Autodefesa através do humor', 'Compreensão crítica'
+    ],
+    genders: ['Masculino', 'Feminino', 'Outro', 'Não-binário'],
+    races: [
+      'Meio-Elfo', 'Humano', 'Gnomo', 'Tiefling', 'Elfo', 'Changeling', 'Metamorfo',
+      'Elemental da Mente', 'Criatura Cósmica'
+    ],
+    additionalDetails: {
+      socialBackground: [
+        'Família intelectual', 'Ambiente acadêmico', 'Comunidade artística',
+        'Ambiente urbano', 'Família de artistas', 'Grupo de intelectuais', 'Cultura crítica'
+      ],
+      temperament: [
+        'Inteligente', 'Crítico', 'Perspicaz', 'Rápido', 'Provocativo', 'Observador',
+        'Incisivo', 'Irônico', 'Sagaz', 'Adaptável'
+      ],
+      culturalTraits: [
+        'Intelectual', 'Crítico', 'Irônico', 'Provocativo', 'Sagaz', 'Desafiador',
+        'Questionador', 'Perspicaz'
+      ]
+    }
+  },
+  'Impulsivo': {
+    trait: 'Impulsivo',
+    compatibleTraits: [
+      'Caótico', 'Aventureiro', 'Corajoso', 'Teimoso', 'Extrovertido', 'Destemido',
+      'Apaixonado', 'Energético', 'Direto'
+    ],
+    heightRange: { min: 155, max: 195 },
+    ageRange: { min: 16, max: 40 },
+    occupations: [
+      'Aventureiro', 'Explorador', 'Artista Performático', 'Mercenário', 'Esportista',
+      'Lutador', 'Piloto', 'Bombeiro', 'Artista de Rua', 'Revolucionário', 'Capitão'
+    ],
+    motivations: [
+      'Emoção', 'Liberdade', 'Desafios imediatos', 'Vivenciar o momento', 'Conquista rápida',
+      'Autorrealização', 'Provar-se', 'Experimentar', 'Superar limites', 'Adrenalina'
+    ],
+    genders: ['Masculino', 'Feminino', 'Outro', 'Não-binário'],
+    races: [
+      'Meio-Orc', 'Tiefling', 'Humano', 'Orc', 'Draconato', 'Metamorfo', 'Meio-Elemental',
+      'Criatura de Energia', 'Genasi'
+    ],
+    additionalDetails: {
+      socialBackground: [
+        'Família aventureira', 'Comunidade de esportistas', 'Ambiente urbano dinâmico',
+        'Tribo nômade', 'Família militar', 'Cultura de risco', 'Comunidade de artistas'
+      ],
+      temperament: [
+        'Energético', 'Dinâmico', 'Espontâneo', 'Ardoroso', 'Direto', 'Audacioso',
+        'Irrequieto', 'Intenso', 'Apaixonado', 'Inconstante'
+      ],
+      culturalTraits: [
+        'Aventureiro', 'Destemido', 'Enérgico', 'Direto', 'Apaixonado', 'Intenso',
+        'Livre', 'Corajoso'
+      ]
+    }
+  },
+  'Reservado': {
+    trait: 'Reservado',
+    compatibleTraits: [
+      'Sombrio', 'Introspectivo', 'Observador', 'Cauteloso', 'Tímido', 'Analítico',
+      'Pensativo', 'Calmo', 'Discreto'
+    ],
+    heightRange: { min: 150, max: 185 },
+    ageRange: { min: 20, max: 60 },
+    occupations: [
+      'Bibliotecário', 'Escritor', 'Pesquisador', 'Artista', 'Ermitão', 'Estudioso',
+      'Arquivista', 'Filósofo', 'Cientista', 'Tradutor', 'Acadêmico', 'Mentor'
+    ],
+    motivations: [
+      'Preservar conhecimento', 'Evitar conflitos', 'Autoconhecimento', 'Reflexão',
+      'Compreender o mundo', 'Paz interior', 'Aprendizado silencioso', 'Criação artística',
+      'Contemplação', 'Descoberta pessoal'
+    ],
+    genders: ['Masculino', 'Feminino', 'Outro', 'Não-binário'],
+    races: [
+      'Elfo', 'Humano', 'Gnomo', 'Meio-Elfo', 'Tiefling', 'Aasimar', 'Drow',
+      'Elemental da Mente', 'Metamorfo Contemplativo'
+    ],
+    additionalDetails: {
+      socialBackground: [
+        'Família acadêmica', 'Comunidade de estudiosos', 'Ambiente monástico',
+        'Biblioteca real', 'Família introvertida', 'Comunidade artística', 'Ambiente rural'
+      ],
+      temperament: [
+        'Reflexivo', 'Profundo', 'Calmo', 'Observador', 'Analítico', 'Discreto',
+        'Meticuloso', 'Introspectivo', 'Silencioso', 'Pensativo'
+      ],
+      culturalTraits: [
+        'Intelectual', 'Profundo', 'Discreto', 'Contemplativo', 'Observador',
+        'Analítico', 'Autoconsciente', 'Reflexivo'
+      ]
+    }
+  },
+  'Leal': {
+    trait: 'Leal',
+    compatibleTraits: [
+      'Corajoso', 'Honrado', 'Altruísta', 'Protetor', 'Disciplinado', 'Confiável',
+      'Comprometido', 'Dedicado', 'Íntegro'
+    ],
+    heightRange: { min: 155, max: 195 },
+    ageRange: { min: 20, max: 60 },
+    occupations: [
+      'Guarda', 'Soldado', 'Cavaleiro', 'Conselheiro', 'Diplomata', 'Policial',
+      'Militar', 'Assistente Pessoal', 'Mentor', 'Parceiro de Equipe', 'Guarda-costas'
+    ],
+    motivations: [
+      'Proteger amigos', 'Honrar compromissos', 'Manter a palavra', 'Defender princípios',
+      'Apoiar a família', 'Seguir um código', 'Construir confiança', 'Manter tradições',
+      'Preservar relacionamentos', 'Ser digno de confiança'
+    ],
+    genders: ['Masculino', 'Feminino', 'Outro', 'Não-binário'],
+    races: [
+      'Humano', 'Anão', 'Meio-Orc', 'Draconato', 'Goliath', 'Aasimar', 'Centauro',
+      'Metamorfo', 'Elemental da Terra'
+    ],
+    additionalDetails: {
+      socialBackground: [
+        'Família militar', 'Comunidade tradicional', 'Ordem religiosa', 'Clã guerreiro',
+        'Família de servidores públicos', 'Comunidade disciplinada', 'Ambiente estruturado'
+      ],
+      temperament: [
+        'Consistente', 'Confiável', 'Dedicado', 'Disciplinado', 'Firme', 'Íntegro',
+        'Responsável', 'Estável', 'Determinado', 'Comprometido'
+      ],
+      culturalTraits: [
+        'Honroso', 'Confiável', 'Disciplinado', 'Tradicional', 'Íntegro', 'Protetor',
+        'Comprometido', 'Respeitador de regras'
+      ]
+    }
+  },
+  'Desconfiado': {
+    trait: 'Desconfiado',
+    compatibleTraits: [
+      'Astuto', 'Sombrio', 'Cauteloso', 'Reservado', 'Calculista', 'Observador',
+      'Estrategista', 'Cético', 'Prudente'
+    ],
+    heightRange: { min: 150, max: 190 },
+    ageRange: { min: 25, max: 65 },
+    occupations: [
+      'Investigador', 'Espião', 'Detetive', 'Segurança', 'Juiz', 'Advogado',
+      'Consultor de Segurança', 'Diplomata', 'Analista', 'Estrategista', 'Investigador Particular'
+    ],
+    motivations: [
+      'Proteger-se', 'Descobrir verdades ocultas', 'Evitar enganos', 'Manter controle',
+      'Preservar segurança', 'Compreender motivações', 'Antecipar riscos', 'Evitar vulnerabilidade',
+      'Manter distância emocional', 'Sobrevivência'
+    ],
+    genders: ['Masculino', 'Feminino', 'Outro', 'Não-binário'],
+    races: [
+      'Humano', 'Tiefling', 'Elfo', 'Meio-Elfo', 'Drow', 'Changeling', 'Metamorfo',
+      'Elemental das Sombras', 'Vampiro'
+    ],
+    additionalDetails: {
+      socialBackground: [
+        'Sobrevivente de traição', 'Família instável', 'Ambiente urbano perigoso',
+        'Comunidade marginalizada', 'Histórico de conflitos', 'Ambiente de intriga',
+        'Família de estrategistas'
+      ],
+      temperament: [
+        'Cauteloso', 'Analítico', 'Observador', 'Prudente', 'Estrategista', 'Reservado',
+        'Cético', 'Vigilante', 'Calculista', 'Protector'
+      ],
+      culturalTraits: [
+        'Cauteloso', 'Estrategista', 'Observador', 'Prudente', 'Reservado', 'Adaptável',
+        'Autopreservação', 'Perspicaz'
+      ]
+    }
+  },
+  'Otimista': {
+    trait: 'Otimista',
+    compatibleTraits: [
+      'Gentil', 'Esperançoso', 'Altruísta', 'Corajoso', 'Inspirador', 'Energético',
+      'Sonhador', 'Resiliente', 'Positivo'
+    ],
+    heightRange: { min: 140, max: 185 },
+    ageRange: { min: 18, max: 55 },
+    occupations: [
+      'Professor', 'Conselheiro', 'Coach', 'Artista', 'Líder Comunitário', 'Terapeuta',
+      'Médico', 'Motivador', 'Líder Religioso', 'Escritor', 'Ativista Social'
+    ],
+    motivations: [
+      'Inspirar outros', 'Promover esperança', 'Resolver problemas', 'Transformar vidas',
+      'Construir comunidade', 'Gerar mudança positiva', 'Superar desafios',
+      'Espalhar alegria', 'Acreditar no potencial humano', 'Criar oportunidades'
+    ],
+    genders: ['Masculino', 'Feminino', 'Outro', 'Não-binário'],
+    races: [
+      'Humano', 'Halfling', 'Aasimar', 'Fey', 'Meio-Elfo', 'Gnomo', 'Elemental da Luz',
+      'Metamorfo Celestial', 'Tritão'
+    ],
+    additionalDetails: {
+      socialBackground: [
+        'Família acolhedora', 'Comunidade solidária', 'Ambiente educacional',
+        'Família de líderes', 'Cultura de superação', 'Comunidade inclusiva',
+        'Ambiente de apoio mútuo'
+      ],
+      temperament: [
+        'Energético', 'Inspirador', 'Positivo', 'Resiliente', 'Esperançoso', 'Empático',
+        'Encorajador', 'Criativo', 'Dinâmico', 'Entusiasmado'
+      ],
+      culturalTraits: [
+        'Esperançoso', 'Inspirador', 'Positivo', 'Transformador', 'Resiliente',
+        'Construtivo', 'Empático', 'Motivador'
+      ]
+    }
+  },
+  'Pessimista': {
+    trait: 'Pessimista',
+    compatibleTraits: [
+      'Sombrio', 'Realista', 'Cético', 'Desconfiado', 'Introspectivo', 'Analítico',
+      'Cauteloso', 'Pragmático', 'Melancólico'
+    ],
+    heightRange: { min: 150, max: 190 },
+    ageRange: { min: 25, max: 65 },
+    occupations: [
+      'Crítico', 'Consultor', 'Analista de Risco', 'Filósofo', 'Escritor', 'Advogado',
+      'Cientista', 'Investigador', 'Estrategista', 'Planejador', 'Consultor Financeiro'
+    ],
+    motivations: [
+      'Evitar decepções', 'Antecipar problemas', 'Proteção emocional', 'Análise crítica',
+      'Compreender limitações', 'Preparar-se para o pior', 'Manter controle',
+      'Evitar riscos', 'Preservar expectativas baixas', 'Autoproteção'
+    ],
+    genders: ['Masculino', 'Feminino', 'Outro', 'Não-binário'],
+    races: [
+      'Humano', 'Tiefling', 'Elfo Negro', 'Meio-Elfo', 'Vampiro', 'Sombrio',
+      'Elemental das Sombras', 'Metamorfo Melancólico'
+    ],
+    additionalDetails: {
+      socialBackground: [
+        'Ambiente de conflito', 'Família instável', 'Comunidade marginalizada',
+        'Histórico de dificuldades', 'Ambiente de sobrevivência', 'Cultura cética',
+        'Família de estrategistas'
+      ],
+      temperament: [
+        'Analítico', 'Cauteloso', 'Crítico', 'Reservado', 'Realista', 'Introspectivo',
+        'Estrategista', 'Precavido', 'Observador', 'Meticuloso'
+      ],
+      culturalTraits: [
+        'Realista', 'Crítico', 'Cauteloso', 'Analítico', 'Estrategista', 'Reservado',
+        'Profundo', 'Preparado'
+      ]
+    }
   }
 };
 export {npcGenerationTree};
